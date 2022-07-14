@@ -3,8 +3,8 @@ import {RouteRecordRaw} from "vue-router";
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
-        name: 'index',
-        component: () => import('../views/index.vue')
+        name: 'home',
+        component: () => import('@/views/home.vue')
     }
 ]
 
