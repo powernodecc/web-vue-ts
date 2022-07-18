@@ -1,23 +1,41 @@
 import http from "@/plugins/axios";
 
-export type LoginVerifyData = {
+export interface RegisterProfile {
     username: string
+    loginId: string
+    password: string
+    verifyCode: string
+}
+
+export interface LoginVerifyData {
+    loginId: string
     password: string
 }
 
-export type LoginToken = {
+export type LoginOK = {
     token: string
+    username: string
+    avatar: string
 }
 
 class UseAuthApi {
+
+    register = async (data: RegisterProfile) => {
+        return await http.request<string>({
+            url: 'register',
+            method: 'post',
+            data
+        })
+    }
     login = async (data: LoginVerifyData) => {
-        return await http.request<LoginToken>({
-            url: 'getOne',
-            method: 'post'
+        return await http.request<LoginOK>({
+            url: 'login',
+            method: 'post',
+            data
         })
     }
 }
 
-const userApi = new UseAuthApi()
+const useAuthApi = new UseAuthApi()
 
-export default userApi
+export default useAuthApi

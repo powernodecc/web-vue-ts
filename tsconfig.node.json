@@ -9,6 +9,7 @@
     "vite.config.ts",
     "vite/*.ts",
     "types/*.d.ts",
-    "types/*.ts"
+    "types/*.ts",
+    "src/components/*.vue"
   ]
 }

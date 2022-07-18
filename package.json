@@ -13,12 +13,14 @@
     "@vee-validate/i18n": "^4.6.1",
     "@vee-validate/rules": "^4.6.1",
     "axios": "^0.27.2",
+    "pinia": "^2.0.16",
     "vee-validate": "^4.5.8",
     "vue": "^3.2.37",
     "vue-router": "4",
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^6.1.1",
     "@types/node": "^18.0.4",
     "@vitejs/plugin-vue": "^3.0.0",
     "autoprefixer": "^10.4.7",
