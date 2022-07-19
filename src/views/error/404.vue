@@ -1,13 +1,13 @@
 <script setup lang="ts">
-
+  import Error from "@/layouts/error/Error.vue"
 </script>
 
 <template>
-  <div>
-    error.404
-  </div>
+  <Error>
+
+  </Error>
 </template>
 
-<style>
+<style lang="scss">
 
 </style>

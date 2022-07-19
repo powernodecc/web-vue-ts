@@ -3,7 +3,7 @@ import {RouteRecordRaw} from "vue-router";
 export default {
     name: 'auth',
     path: '/auth',
-    component: () => import("@/layouts/auth.vue"),
+    component: () => import("@/layouts/admin.vue"),
     children: [
         {
             name: 'auth.login',
