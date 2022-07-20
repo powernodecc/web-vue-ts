@@ -61,8 +61,7 @@
 
         <div class="flex justify-center mt-2">
           <a class="py-1 px-2 text-sm hover:text-violet-500 duration-200" href="">网站首页</a>
-          <router-link class="py-1 px-2 text-sm hover:text-violet-500 duration-200" :to="{name:'auth.register'}">用户注册
-          </router-link>
+          <router-link class="py-1 px-2 text-sm hover:text-violet-500 duration-200" :to="{name:'auth.register'}">用户注册</router-link>
           <a class="py-1 px-2 text-sm hover:text-violet-500 duration-200" href="">找回密码</a>
         </div>
 

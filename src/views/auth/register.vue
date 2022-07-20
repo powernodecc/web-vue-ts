@@ -4,11 +4,15 @@
   import useAuthApi, {RegisterProfile} from "@/api/useAuthApi";
   import localStore from "@/utils/localStore";
   import {LocalStorageEnum} from "@/enum/localStorageEnum";
+  import getVerificationCode from "@/views/auth/getVerificationCode";
+  import tips from "@/utils/message";
 
   const router = useRouter()
   const {Form, Field, useForm} = v
+  const sendTime = ref<number>(3)
+  const isClick = ref<boolean>(false)
 
-  const {handleSubmit, errors} = useForm({
+  const {handleSubmit, errors, values, setErrors} = useForm({
     initialValues: {
       username: '',
       loginId: '',
@@ -17,41 +21,42 @@
     },
     validationSchema: {
       username: {
-        required: true,
         min: 3
       },
       loginId: {
-        required: true,
         email: true
       },
       password: {
-        required: true,
         min: 3
       },
-      verifyCode: {
-        required: true
-      }
+      verifyCode: {}
     }
   })
 
-  const sendTime = ref<number>(3)
-  const isClick = ref<boolean>(false)
-  const getVerifyCode = () => {
-
+  const tryGetCode = async () => {
     if (isClick.value === true) {
-      console.log("isClick")
       return
-    }
-    isClick.value = true
-    const timer = setInterval(() => {
-      if (sendTime.value <= 1) {
-        sendTime.value = 3;
-        isClick.value = false
-        clearInterval(timer)
-        return
+    } else if (values.loginId === '' || values.loginId === undefined) {
+      setErrors({loginId: '账号不能空'})
+      return
+    } else {
+      isClick.value = true
+      const timer = setInterval(() => {
+        if (sendTime.value <= 1) {
+          sendTime.value = 3;
+          isClick.value = false
+          clearInterval(timer)
+          return
+        }
+        sendTime.value = sendTime.value - 1
+      }, 1000)
+
+      const verificationData = {loginId: values.loginId}
+      const r = await getVerificationCode(verificationData)
+      if (r.code === 200) {
+        tips('发送成功', 'success')
       }
-      sendTime.value = sendTime.value - 1
-    }, 1000)
+    }
   }
 
   const register = handleSubmit(async (values: RegisterProfile) => {
@@ -60,7 +65,7 @@
       const loginResult = await useAuthApi.login({loginId: values.loginId, password: values.password})
       if (loginResult.code === 200) {
         localStore.set(LocalStorageEnum.TOKEN_NAME, loginResult.data.token, 0);
-        await router.push({name: 'admin.home'})
+        // await router.push({name: 'admin.home'})
       }
     }
   })
@@ -132,11 +137,11 @@
                 <div class="text-sm mt-2 text-red-500 h-5 ">{{ errors.verifyCode }}</div>
               </div>
             </Field>
-            <button
-                class="p-3 ml-6 h-[42px] border-gray-200 border rounded-md bg-white text-xs flex-1 duration-300 hover:border-violet-500 hover:text-violet-500"
-                @click="getVerifyCode">
+            <div
+                class="p-3 ml-6 h-[42px] text-center border-gray-200 border rounded-md bg-white text-xs flex-1 duration-300 hover:border-violet-500 hover:text-violet-500"
+                @click.stop="tryGetCode">
               <span>{{ isClick ? sendTime : "发送验证码" }}</span>
-            </button>
+            </div>
           </div>
         </div>
         <div class="flex justify-center items-center">

@@ -4,27 +4,48 @@
   <meta charset="UTF-8">
   <title>Title</title>
   <style>
-    body {
-        width: 100vw;
-        height: 100vh;
-        background-color: gray;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+      * {
+          padding: 0;
+          margin: 0;
+      }
 
-    div {
-        width: 200px;
-        height: 200px;
-        background-color: greenyellow;
-    }
+      main {
+          width: 600px;
+          height: 600px;
+          background-color: #34495e;
+      }
+
+      div {
+          position: absolute;
+          top: 100px;
+          left: 100px;
+          width: 200px;
+          height: 200px;
+          transform: translate(50%, 50%);
+          transition: 2s;
+      }
+
+      div:nth-child(1) {
+          background-color: #2ecc71;
+          transform: perspective(900px) rotateY(45deg);
+      }
+
+      div:nth-child(2) {
+          background-color: #f1c40f;
+          transform: perspective(900px) rotateY(45deg);
+      }
+
+      main:hover div:nth-child(2) {
+          transform: perspective(900px) rotateY(45deg) translateZ(200px);
+          transition: 2s;
+      }
+
   </style>
 </head>
 <body>
-  <div></div>
-  <script>
-      const ele = document.getElementById("id")
-      console.log(ele);
-  </script>
+  <main>
+    <div></div>
+    <div></div>
+  </main>
 </body>
 </html>

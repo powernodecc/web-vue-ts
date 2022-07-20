@@ -1,5 +1,9 @@
 import http from "@/plugins/axios";
 
+export interface VerificationLoginId {
+    loginId: string
+}
+
 export interface RegisterProfile {
     username: string
     loginId: string
@@ -19,6 +23,14 @@ export type LoginOK = {
 }
 
 class UseAuthApi {
+
+    getVerificationCode = async (data: VerificationLoginId) => {
+        return await http.request<string>({
+            url: 'getVerificationCode',
+            method: 'post',
+            data
+        })
+    }
 
     register = async (data: RegisterProfile) => {
         return await http.request<string>({
