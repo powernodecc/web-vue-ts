@@ -8,6 +8,3 @@ export default function loadModuleRoutes(): RouteRecordRaw[] {
     })
     return routes
 }
-
-
-

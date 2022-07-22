@@ -3,7 +3,7 @@ import IMenu, {Menu} from "../../types/menu";
 import router from "@/router";
 
 
-const useMenuStore = defineStore('menuStore', {
+const menuStore = defineStore('menuStore', {
     state: () => {
         return {
             menus: [] as IMenu[],
@@ -34,17 +34,17 @@ const useMenuStore = defineStore('menuStore', {
             })
         },
         toggleMenu(menu: IMenu, _menu: Menu) {
-            if (menu.isClick === true && _menu === undefined) {
+            if (menu.isClick === true && _menu === null) {
                 menu.isClick = false
-                return
-            }
-            this.resetMenu(menu)
-            menu.isClick = true
-            if (_menu !== undefined) {
-                _menu.isClick = true
+            } else {
+                this.resetMenu(menu)
+                menu.isClick = true
+                if (_menu !== null) {
+                    _menu.isClick = true
+                }
             }
         }
     }
 })
 
-export default useMenuStore
+export default menuStore

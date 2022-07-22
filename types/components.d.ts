@@ -7,11 +7,17 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Breadcrumb: typeof import('./../src/components/basic/Breadcrumb.vue')['default']
+    Drop: typeof import('./../src/components/user/drop.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElContainer: typeof import('element-plus/es')['ElContainer']
-    HdButton: typeof import('./../src/components/HdButton.vue')['default']
+    Error: typeof import('./../src/components/error/Error.vue')['default']
+    HdButton: typeof import('./../src/components/basic/HdButton.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TAvatar: typeof import('tdesign-vue-next')['Avatar']
+    TBreadcrumb: typeof import('tdesign-vue-next')['Breadcrumb']
+    TBreadcrumbItem: typeof import('tdesign-vue-next')['BreadcrumbItem']
   }
 }

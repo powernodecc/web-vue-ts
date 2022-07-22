@@ -32,7 +32,7 @@
     "src/**/*.vue",
     "types/*.d.ts",
     "types/*.ts",
-    "src/components/*.vue"
+    "src/components/**/*.vue"
   ],
   "references": [
     {
